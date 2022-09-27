@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.aether.moviesmvp20.R
 import com.aether.moviesmvp20.databinding.ActivityMainBinding
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
@@ -15,10 +16,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        Fresco.initialize(this)
+        setContentView(R.layout.activity_main)
+
         setContentView(binding.root)
         inicializar()
     }
-    fun inicializar(){
+    private fun inicializar(){
         val adapter = TabsFragmentAdapter(supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
         adapter.addItem(MovieMainFragment(),"Movies")
         adapter.addItem(FavoriteMovieFragment(),"Favorites")
